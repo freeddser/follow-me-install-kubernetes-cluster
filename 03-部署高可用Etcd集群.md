@@ -6,9 +6,9 @@ tags: etcd
 
 kuberntes 系统使用 etcd 存储所有数据，本文档介绍部署一个三节点高可用 etcd 集群的步骤，这三个节点复用 kubernetes master 机器，分别命名为`etcd-host0`、`etcd-host1`、`etcd-host2`：
 
-+ etcd-host0：10.64.3.7
-+ etcd-host1：10.64.3.8
-+ etcd-host2：10.66.3.86
++ etcd-host0：192.168.1.13
++ etcd-host1：192.168.1.14
++ etcd-host2：192.168.1.15
 
 ## 使用的变量
 
@@ -16,10 +16,10 @@ kuberntes 系统使用 etcd 存储所有数据，本文档介绍部署一个三�
 
 ``` bash
 $ export NODE_NAME=etcd-host0 # 当前部署的机器名称(随便定义，只要能区分不同机器即可)
-$ export NODE_IP=10.64.3.7 # 当前部署的机器 IP
-$ export NODE_IPS="10.64.3.7 10.64.3.8 10.66.3.86" # etcd 集群所有机器 IP
+$ export NODE_IP=192.168.1.13 # 当前部署的机器 IP
+$ export NODE_IPS="192.168.1.13 192.168.1.14 192.168.1.15" # etcd 集群所有机器 IP
 $ # etcd 集群间通信的IP和端口
-$ export ETCD_NODES=etcd-host0=https://10.64.3.7:2380,etcd-host1=https://10.64.3.8:2380,etcd-host2=https://10.66.3.86:2380
+$ export ETCD_NODES=etcd-host0=https://192.168.1.13:2380,etcd-host1=https://192.168.1.14:2380,etcd-host2=https://192.168.1.15:2380
 $ # 导入用到的其它全局变量：ETCD_ENDPOINTS、FLANNEL_ETCD_PREFIX、CLUSTER_CIDR
 $ source /root/local/bin/environment.sh
 $
@@ -162,11 +162,11 @@ $ for ip in ${NODE_IPS}; do
 
 ``` text
 2017-04-10 14:50:50.011317 I | warning: ignoring ServerName for user-provided CA for backwards compatibility is deprecated
-https://10.64.3.7:2379 is healthy: successfully committed proposal: took = 1.687897ms
+https://192.168.1.13:2379 is healthy: successfully committed proposal: took = 1.687897ms
 2017-04-10 14:50:50.061577 I | warning: ignoring ServerName for user-provided CA for backwards compatibility is deprecated
-https://10.64.3.8:2379 is healthy: successfully committed proposal: took = 1.246915ms
+https://192.168.1.14:2379 is healthy: successfully committed proposal: took = 1.246915ms
 2017-04-10 14:50:50.104718 I | warning: ignoring ServerName for user-provided CA for backwards compatibility is deprecated
-https://10.66.3.86:2379 is healthy: successfully committed proposal: took = 1.509229ms
+https://192.168.1.15:2379 is healthy: successfully committed proposal: took = 1.509229ms
 ```
 
 三台 etcd 的输出均为 healthy 时表示集群服务正常（忽略 warning 信息）。

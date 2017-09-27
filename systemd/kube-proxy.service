@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 ExecStart=/root/local/bin/kube-proxy \
-  --bind-address=10.64.3.7 \
+  --bind-address=192.168.1.13 \
   --cluster-cidr=10.254.0.0/16 \
-  --hostname-override=10.64.3.7 \
+  --hostname-override=192.168.1.13 \
   --kubeconfig=/etc/kubernetes/kube-proxy.kubeconfig \
   --logtostderr=true \
   --v=2

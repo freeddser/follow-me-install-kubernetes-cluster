@@ -11,7 +11,7 @@ kubernetes 要求集群内各节点能通过 Pod 网段互联互通，本文档�
 本文档用到的变量定义如下：
 
 ``` bash
-$ export NODE_IP=10.64.3.7 # 当前部署节点的 IP
+$ export NODE_IP=192.168.1.13 # 当前部署节点的 IP
 $ # 导入用到的其它全局变量：ETCD_ENDPOINTS、FLANNEL_ETCD_PREFIX、CLUSTER_CIDR
 $ source /root/local/bin/environment.sh
 $
@@ -168,7 +168,7 @@ $ /root/local/bin/etcdctl \
   --cert-file=/etc/flanneld/ssl/flanneld.pem \
   --key-file=/etc/flanneld/ssl/flanneld-key.pem \
   get ${FLANNEL_ETCD_PREFIX}/subnets/172.30.19.0-24
-{"PublicIP":"10.64.3.7","BackendType":"vxlan","BackendData":{"VtepMAC":"d6:51:2e:80:5c:69"}}
+{"PublicIP":"192.168.1.13","BackendType":"vxlan","BackendData":{"VtepMAC":"d6:51:2e:80:5c:69"}}
 ```
 
 ### 确保各节点间 Pod 网段能互联互通
